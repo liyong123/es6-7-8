@@ -61,21 +61,21 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 }
 // 对象的解构
 {
-    var _a5 = void 0,
-        _b4 = void 0;
-    var _a$b = { a: 10, b: 20 };
-    _a5 = _a$b.a;
-    _b4 = _a$b.b;
+    /* let a, b
+    ({a, b}= {a: 10, b: 20}) */
+    var _a$b = { a: 10, b: 20 },
+        _a5 = _a$b.a,
+        _b4 = _a$b.b;
 
     console.log(_a5, _b4);
 }
 
 {
-    var num = void 0,
-        total = void 0; //自定义属性名
-    var _a$b2 = { a: 100, b: 200 };
-    num = _a$b2.a;
-    total = _a$b2.b;
+    /*  let num, total ;//自定义属性名
+     ({a: num, b: total}= {a: 100, b: 200}) */
+    var _a$b2 = { a: 100, b: 200 },
+        num = _a$b2.a,
+        total = _a$b2.b;
 
     console.log(num, total);
 }

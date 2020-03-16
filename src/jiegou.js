@@ -31,14 +31,16 @@
 }
 // 对象的解构
 {
-    let a, b
-    ({a, b}= {a: 10, b: 20})
+    /* let a, b
+    ({a, b}= {a: 10, b: 20}) */
+    let {a, b} = {a: 10, b: 20}
     console.log(a, b)
 }
 
 {
-    let num, total ;//自定义属性名
-    ({a: num, b: total}= {a: 100, b: 200})
+   /*  let num, total ;//自定义属性名
+    ({a: num, b: total}= {a: 100, b: 200}) */
+    let {a: num, b: total} = {a: 100, b: 200}
     console.log(num, total)
 }
 
