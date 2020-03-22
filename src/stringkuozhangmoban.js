@@ -15,7 +15,7 @@ es6解决方案：将超过两个字节组成的字符的码点放在一对花�
     console.log("str3:", str3) //str3: 𠮱
 }
 
-//es6中的for...of...循环对象，循环字符串的时候尽量用for...of...
+//es6中的for...of...一般循环对象，循环字符串的时候尽量用for...of...
 {
     const str3 = '\u{20bb1}'
     for(let i= 0, len=str3.length; i< len; i++ ) {

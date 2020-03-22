@@ -78,15 +78,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var _objNew6 = Object.assign({}, _obj6, { color: 'red' });
     console.log('assign:', _objNew6);
 
-    /* Object.keys()、Object.values()、Object.entries() */
-    const resultJson = {name: 'zhangsan', age: 20}
-    let obj= {}
-    console.log('Object.keys:', Object.keys(resultJson))
-    console.log('Object.values:', Object.values(resultJson)) 
-    console.log('Object.entries:', Object.entries(resultJson)) 
-    for(const key of Object.keys(resultJson)) {
-        obj[key] = resultJson[key]
-    }
-    console.log('keysObj:', obj)
+    /* Object.keys(), Object.values(), Object.entries() */
+    var person = {
+        name: 'zhangsan',
+        age: 20,
+        say: function say() {
+            console.log(this.name);
+        }
+    };
+    var keys = Object.keys(person); /* 键名 */
+    console.log('keys:', keys);
 
+    var values = Object.values(person); /* 键值 */
+    console.log('values:', values);
+
+    var entries = Object.entries(person); /* 键值对 */
+    console.log('entries:', entries);
 }

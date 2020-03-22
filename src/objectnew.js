@@ -76,4 +76,21 @@
     let objNew = Object.assign({}, obj, {color: 'red'})
     console.log('assign:', objNew)
 
+    /* Object.keys(), Object.values(), Object.entries() */
+    const person = {
+        name: 'zhangsan',
+        age: 20,
+        say() {
+            console.log(this.name)
+        }
+    }
+    let keys = Object.keys(person); /* 键名 */
+    console.log('keys:', keys)
+    
+    let values = Object.values(person) /* 键值 */
+    console.log('values:', values) 
+
+    let entries = Object.entries(person) /* 键值对 */
+    console.log('entries:', entries)
+
 }

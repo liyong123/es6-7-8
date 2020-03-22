@@ -17,7 +17,7 @@ es6解决方案：将超过两个字节组成的字符的码点放在一对花�
     console.log("str3:", str3); //str3: 𠮱
 }
 
-//es6中的for...of...循环对象，循环字符串的时候尽量用for...of...
+//es6中的for...of...一般循环对象，循环字符串的时候尽量用for...of...
 {
     var _str = '\uD842\uDFB1';
     for (var i = 0, len = _str.length; i < len; i++) {
