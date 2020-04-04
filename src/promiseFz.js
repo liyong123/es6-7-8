@@ -15,10 +15,10 @@
            console.log("ajax错误：", error)
         }
     }
-    let url = 'localhost:8888'
-    ajax(`${url}`, function(data) {
-        console.log('data:', data)
-    })
+    // let url = 'localhost:8888'
+    // ajax(`${url}`, function(data) {
+    //     console.log('data:', data)
+    // })
 }
 
 {
@@ -83,10 +83,10 @@
     }
 
     /* 调用 */
-    let url = 'localhost:8888'
-    ajaxRequest(`${url}`).then(value => {
-        console.log(value)
-    }, reason => {
-        console.log('then的第二个参数输出的错误:', reason)
-    })
+    // let url = 'localhost:8888'
+    // ajaxRequest(`${url}`).then(value => {
+    //     console.log(value)
+    // }, reason => {
+    //     console.log('then的第二个参数输出的错误:', reason)
+    // })
 }

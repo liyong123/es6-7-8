@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Promise简介</title>
+</head>
+<body>
+    <div>
+        <h2>Promise</h2>
+        <h3>Promise简介:</h3>
+        <p>1、所谓Promise就是一个容器，里面保存着某一个未来才会结束的事件（通常是一个异步操作）的结果。</p>
+        <p>2、ES6规定，Promise对象是一个构造函数，用来生成Promise实例。</p>
+        <p>3、Promise构造函数接收一个函数作为参数，该函数的两个参数分别是resolve和reject。他们也是两个函数，由JavaScript引擎提供，不用自己部署。</p>
+        <p>4、resolve函数的作用是：将Promise对象的状态从“未完成”变成“成功”，即从pending变成resolved，</br></p>
+        在异步操作成功时调用，并且将异步操作的结果作为参数传递出去，必须resolve()执行。then()的第一个参数方法才会触发。
+        <p>5、reject函数的作用是，将Promise对象的状态从“未完成”变为“失败”，即从“pending”变为rejected，</br></p>
+        <p>在异步操作失败时调用，并且将异步操作报出的错误，作为参数传递出去。</p>
+        <h3>三种状态：</h3>
+        <p>pending(进行中)，fulfilled(resolved已成功或者已成功)，rejected(已失败)</p>
+        <h3>特点：</h3>
+        <p>1、只有异步操作可以决定当前处于的状态，并且任何其他操作无法改变这个状态</p>
+        <p>2、一旦状态改变就不会再变。状态改变的过程只可能是：</br></p>
+        <p>从pending变成fulfilled或者从pending变成rejected。</p>
+        <h3>then()方法：</h3>
+        <p>1、then方法可以接受两个回调函数作为参数，第一个回调函数是Promise对象的状态变为resolve时调用，<br></p>
+        <p>2、第二个回调函数是Promise对象的状态变为rejected时调用。其中第二个函数是可选的，这两个函数都接受Promise对象传出的值作为参数。</p> 
+        <h3>Promise优势：</h3>
+        <p>1、可以在then方法中继续返回Promise对象，然后在外面继续用then()来进行回调操作</p>
+        <p>2、从表面看Promise只是能够简化层层回调的写法，而实质上，Promise的精髓是“状态”，<br></p>
+        用维护状态，传递状态的方式来使得回调函数能够及时调用，它比传递callback函数要简单，灵活的多。
+    </div>
+</body>
+</html>

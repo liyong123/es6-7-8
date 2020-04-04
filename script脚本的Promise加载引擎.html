@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>script脚本的Promise加载引擎</title>
+</head>
+<body>
+</body>
+<script>
+   function loadScript(src) {
+       return new Promise((resolve, reject) => {
+           const script = document.createElement('script');
+           script.src = src
+           script.onload = () => resolve(script)
+           script.onerror = reject
+           document.body.appendChild(script)
+       })
+   }
+   // test3.js加载完成，再加载test4.js
+   loadScript('./src/test3.js').then(script => {
+       return loadScript('./src/test4.js') // 再返回一个promise
+   }).then( script => {
+       /* 此时加载完test4.js，可以执行其中的 test4函数,
+       test4函数中又有依赖test3.js中的test3()函数 */
+       test4()
+   })
+</script>
+</html>
