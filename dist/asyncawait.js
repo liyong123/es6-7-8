@@ -75,7 +75,7 @@ var promisify = require('util').promisify; /* node8 中的方法 */
 }
 
 {
-    /* async,await 就是generator的语法糖 */
+    /* async,await 就是generator,Promise的语法糖 */
     var _readFileFun2 = promisify(fs.readFile);
     var rf = async function rf() {
         // async 函数

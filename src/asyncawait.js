@@ -55,7 +55,7 @@ const promisify = require('util').promisify  /* node8 中的方法 */
 }
 
 {
-    /* async,await 就是generator的语法糖 */
+    /* async,await 就是generator,Promise的语法糖 */
     const readFileFun = promisify(fs.readFile)
     const rf = async () => { // async 函数
         try { // 结合try 一起使用
