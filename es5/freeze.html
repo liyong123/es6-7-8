@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Object.freeze()</title>
+</head>
+<body>
+    <p>1、Object.freeze() 方法可以冻结一个对象。一个被冻结的对象再也不能被修改；
+    冻结了一个对象则不能向这个对象添加新的属性，不能删除已有属性，不能修改该对象已有属性的可枚举性、可配置性、可写性，以及不能修改已有属性的值。
+    此外，冻结一个对象后该对象的原型也不能被修改。freeze() 返回和传入的参数相同的对象。</p>
+    <p>2、这个方法实际上会在一个现有对象上调用Object.seal(),并把所有现有属性标记为writable: false,这样就无法修改它们的值。</p>
+    <p>3、这个方法是你可以应用在对象上级别最高的不可变性，它会禁止对于对象本身及其任意直接属性的修改（但是这个对象引用的其他对象是不受影响的）
+        你可以深度冻结一个对象，具体方法为，首先这个对象上调用Object.freeze()然后遍历它引用的所有对象，并在这些对象上调用Object.freeze()。
+        但是一定要小心，因为这么做有可能会无意中冻结其他共享对象。</p>
+    <script>
+        'use strict'
+        const obj = {
+            name: 'xiaoS', // 三个属性 都是true
+        }
+        Object.freeze(obj)
+        /* obj.age = 20 */
+        /* 报错：Cannot add property age, object is not extensible */
+        /* Object.defineProperty(obj, name, {
+            value: 'xiaoR',
+            configurable: true
+        }) */
+        /* 报错：Cannot define property , object is not extensible */
+        /* delete obj.name */ // 报错：Cannot delete property 'name' of #<Object>
+        obj.name = 'xiaoH' // 报错：Cannot assign to read only property 'name' of object '#<Object>'
+    </script>
+</body>
+</html>

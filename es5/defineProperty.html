@@ -7,6 +7,147 @@
     <title>Object.defineProperty()</title>
 </head>
 <body>
-    
+    <div>
+        <p>1、Object.defineProperty()方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。</p>
+        <p>2、Object.defineProperty(obj, prop, descriptor):
+            <p>obj: 要定义属性的对象。</p>
+            <p>prop: 要定义或者修改的属性名称或Symbol。</p>
+            <p>descriptor: 要定义或修改的属性描述符。</p>
+        </p>
+        <p>3、一般通过为对象的属性赋值的情况下，对象的属性可以修改也可以删除，但是通过Object.defineProperty()定义属性，通过描述符的设置可以进行更精准的控制对象属性。</p>
+        <p>4、通过Object.defineProperty()为对象定义属性，有两种形式，且不能混合使用，分别为数据描述符，存取描述符，下面分别描述下两者的区别：
+            <p>数据描述符 --特有的两个属性（value,writable）。</p>
+            <p>存取描述符 --是由一对 getter、setter 函数来描述的属性。</p>
+            <p>数据描述符和存取描述均具有以下描述符：
+                configrable 描述属性是否可配置，以及是否可删除。
+                enumerable 描述属性是否可枚举，能够在for in 或者 Object.keys()中遍历。</p>
+        </p>
+        <p>
+            5、描述符默认值汇总：
+            1、拥有布尔值的键 configurable、enumerable 和 writable 的默认值都是 false。
+            2、属性值和函数的键 value、get 和 set 字段的默认值为 undefined。
+        </p>
+        <p>
+            6、get：一个给属性提供getter的方法，如果没有getter则为undefined。该方法返回值被用作属性值。默认为undefined。
+            set：一个给属性提供setter的方法，如果没有setter则为undefined。该方法将接受唯一参数，并将该参数的新值分配给该属性。默认值为undefined。
+        </p>
+        <p>
+            赋值可能会调用原型上的setter，定义会创建一个自身属性。
+            原型链中的同名只读属性可能会阻止赋值操作，但不会阻止定义操作。
+            如果原型链中存在一个同名的只读属性，则无法通过赋值的方式在原对象上添加这个自身属性，必须使用定义操作才可以。这项限制是在ECMAScript 5.1中引入的
+        </p>
+    </div>
+    <script>
+        'use strict'
+        {
+            console.log('writable:--------------------------------')
+            const obj = {}
+            Object.defineProperty(obj, 'name', {
+                value: 'xiaoW',
+                writable: true  //是否可以改变属性值
+            })
+            console.log(obj) //name属性不可枚举
+            obj.name = 'xiaoWT'
+            console.log(obj.name)
+        }
+        {
+            console.log('get、set------------------------------')
+            const obj = {}
+            let temp = 'xiaoG'
+            Object.defineProperty(obj, 'name', {
+                get: function() {
+                    console.log('读取属性')
+                    return temp
+                },
+                set: function(newValue) {
+                    console.log('设置属性')
+                    temp = newValue
+                }
+            })
+            console.log(obj.name)
+            obj.name = 'xiaoS'
+            console.log(obj.name)
+        }
+        {
+            console.log('configurable-delete:--------------------------------')
+            const obj = {}
+            Object.defineProperty(obj, 'name', {
+                value: 'xiaoC',
+                writable: true,
+                enumerable: true,
+                configurable: false
+            })
+            /* configurable: false, 不可删除 */
+            /* delete obj.name */ /* 报错：Cannot delete property 'name' of #<Object> */
+        }
+        {
+            console.log('configurable-redefine:--------------------------------')
+            const obj = {}
+            Object.defineProperty(obj, 'name', {
+                value: 'xiaoC',
+                configurable: false
+            })
+            /* Object.defineProperty(obj, 'name', {
+                value: 'xiaoD'
+            }) */
+            /* 报错：Cannot redefine property: name*/
+            /* configurable: false, 不可重新定义 */
+        }
+        {
+            console.log('configurable-redefine:--------------------------------')
+            const obj = {}
+            Object.defineProperty(obj, 'name', {
+                value: 'xiaoC',
+                configurable: false,
+                writable: true
+            })
+            Object.defineProperty(obj, 'name', {
+                value: 'xiaoD'
+            })
+            console.log(obj.name)
+            /* configurable: false, writable: true 可重新定义 */
+            /* configurable: false 时，不能删除当前属性，且不能重新配置当前属性的描述符,但是在writable: true的情况下，可以改变value的值
+               configurable: true时，可以删除当前属性，可以配置当前属性所有描述符。 */
+        }
+        {
+            console.log('enumerable:--------------------------------')
+            const obj = {}
+            Object.defineProperty(obj, 'name', {
+                value: 'xiaoE',
+                enumerable: false // name不可枚举，打印obj 时，name和原型上的方法属性一样是灰色
+            })
+            obj.age = 20 //可枚举 ,直接定义的属性，其writable、enumerable、configurable都是true
+            Object.defineProperty(obj, 'address', {
+                value: 'nj',
+                enumerable: true // address可枚举
+            })
+            console.log(obj)
+            console.log(Object.keys(obj))
+            for(let key in obj) { console.log(key) }
+            console.log(obj.propertyIsEnumerable('name'))
+            console.log(obj.propertyIsEnumerable('age'))
+            console.log(obj.propertyIsEnumerable('address'))
+        }
+        {
+           /*  对象常量
+           结合writable: false 和 configurable: false 就可以创建一个真正的常量属性（不可修改，不可重新定义或者删除） */
+        }
+        {
+            /* 禁止扩展
+            如果你想禁止一个对象添加新属性并且保留已有属性，就可以使用Object.preventExtensions() */
+            const obj = {
+                name: 'xiaoP'
+            }
+            Object.preventExtensions(obj)
+            /* obj.age = 20 */
+            /* 报错：Cannot add property age, object is not extensible */
+            Object.defineProperty(obj, 'name', {
+                value: 'xiaoPF',
+                writable: false,
+                configurable: false
+            })
+            console.log(obj.name) // 仍然可以配置
+        }
+    </script>
 </body>
 </html>

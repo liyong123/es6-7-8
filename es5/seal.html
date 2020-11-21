@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Object.seal()</title>
+</head>
+<body>
+    <p>Object.seal()方法封闭一个对象，阻止添加新属性并将所有现有属性标记为不可配置、不可删除。但是当前属性的值只要原来是可写的就可以改变。</p>
+    <script>
+        'use strict'
+        const obj = {
+            name: 'xiaoS', // 三个属性 都是true
+        }
+        Object.seal(obj)
+        /* obj.age = 20 */
+        /* 报错：Cannot add property age, object is not extensible */
+        /* Object.defineProperty(obj, name, {
+            value: 'xiaoR',
+            configurable: true
+        }) */
+        /* 报错：Cannot define property , object is not extensible */
+        /* delete obj.name */ // 报错：Cannot delete property 'name' of #<Object>
+        obj.name = 'xiaoH' // name属性的值原来是可写的就可以改变
+    </script>
+</body>
+</html>
