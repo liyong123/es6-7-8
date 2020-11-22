@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Object.create()</title>
+</head>
+<body>
+    <div>
+        <p>1、Object.create(proto, [propertiesObject])</p>
+        <p>Object.create()方法创建一个新对象，使用现有的对象来提供新创建的对象的__proto__。即以指定对象为原型创建新的对象。返回一个新对象，带着指定的原型对象和属性。</p>
+        <p>[propertiesObject]：可选。需要传入一个对象，为新的对象指定新的属性，并对属性进行描述。</p>
+        <p>{ xxx: { value: 'xxx', writable: false, enumerable: false, configurable: false }, xxx...}</p>
+    </div>
+    <script>
+        {
+            console.log('----------------------------')
+            const obj = {
+                name: 'xiaoC'
+            }
+            const objP = Object.create(obj) //objP的原型指向obj
+            console.log(objP)
+        }
+        {
+            console.log('----------------------------')
+            const obj = {
+                name: 'xiaoC'
+            }
+            const objP = Object.create(obj, {
+                age: {
+                    value: 20  // age是objP的属性，且writeable等属性默认为false，age值不可修改、枚举等。
+                }
+            })
+            console.log(objP)
+            for (let key in objP) { console.log(key) } //age的enumerable为false,不能枚举，但是能枚举其原型指向的obj上的属性。
+        }
+        
+    </script>
+</body>
+</html>

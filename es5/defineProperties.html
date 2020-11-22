@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Object.defineProperties()</title>
+</head>
+<body>
+    <p>Object.defineProperties() 方法直接在一个对象上定义新的属性或修改现有属性，并返回该对象。</p>
+    <script>
+        {
+            console.log('定义新的属性---------------------------')
+            const obj = {
+                name: 'xiaoD'
+            }
+            Object.defineProperties(obj, {
+                age: {
+                    value: 20,
+                    writable: true,
+                    enumerable: true,
+                    configurable: true
+                }
+            })
+            console.log(obj)
+        }
+        {
+            console.log('--------------------------')
+            const obj = {
+                name: 'xiaoG'
+            }
+            let temp = 20
+            Object.defineProperties(obj, {
+                age: {
+                    get(){
+                        /* 获取属性 */
+                        console.log('获取属性')
+                        return temp
+                    },
+                    set(newValue) {
+                        /* 设置属性 */
+                       console.log('设置属性')
+                       temp = newValue
+                    }
+                }
+            })
+            console.log(obj.age)
+            obj.age = 30
+            console.log(obj.age)
+            console.log(temp)
+        }
+        {
+            console.log('--------------------------')
+            const obj = {
+                firstName: 'xiaoG',
+                lastName: 'nj'
+            }
+            Object.defineProperties(obj, {
+                fullName: {
+                    get(){
+                        /* 获取属性 */
+                        console.log('获取属性')
+                        return this.firstName + this.lastName
+                    },
+                    set(newValue) {
+                       console.log('设置属性')
+                       console.log(newValue)
+                       const newD = newValue.split(' ')
+                       this.firstName = [newD[0]]
+                       this.lastName = [newD[1]]
+                    }
+                }
+            })
+            console.log(obj)
+            console.log(obj.fullName)
+            obj.fullName = 'xiaoS two'
+            console.log(obj.fullName)
+        }
+        {
+            console.log('get\set--------------------------')
+            /* 对象本身的两个方法：
+            get propertyName() {} 用来得到当前属性值的回到函数，
+            set propertyName() {} 用来监视当前属性值变化的回到函数 */
+            const obj = {
+                firstName: 'xiaoG',
+                lastName: 'one',
+                get fullName() {
+                    return this.firstName + this.lastName
+                },
+                set fullName(newValue) {
+                    console.log('设置属性')
+                    console.log(newValue)
+                    const newD = newValue.split(' ')
+                    this.firstName = [newD[0]]
+                    this.lastName = [newD[1]]
+                }
+            }
+            console.log(obj.fullName)
+            obj.fullName = 'xiaoH two'
+            console.log(obj.fullName)
+        }
+    </script>
+    
+</body>
+</html>

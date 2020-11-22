@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>es5-JSON对象</title>
+</head>
+<body>
+    <p>
+        1、JSON.stringify(obj/arr):将js对象(数组)转换为json对象（数组）。
+    </p>
+    <p>
+        2、JSON.parse(json)：将json对象（数组）转换为js对象（数组）。
+    </p>
+    <p>便于前后端联调，数据转换。</p>
+    <script>
+        const obj = {
+            name: 'xiaoL'
+        }
+        let str = JSON.stringify(obj)
+        console.log(typeof str) // string
+        console.log(Object.prototype.toString.call(str)) // [object, String]
+        console.log(str)
+        console.log('----------------------------------')
+        let objP = JSON.parse(str)
+        console.log(typeof objP) // object
+        console.log(Object.prototype.toString.call(objP)) // [object, Object]
+        console.log(objP)
+    </script>
+</body>
+</html>
