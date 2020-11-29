@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>call、apply、bind</title>
+</head>
+<body>
+    <script>
+         /* 1、call、apply、bind都是函数Function原型上的方法，都能指定函数中的this,即改变函数的指向 */
+         /* 2、区别：call、apply都能立即调用函数，bind是将函数返回 */
+         /* 3、call可以借用Array原型上的方法改变类数组 */
+         /* 4、bind的特点：绑定完this，不会立即调用当前的函数，而是将函数返回,通常来指定回调函数的this,比如定时器、异步 */
+    {
+        console.log('Window---------------------------------')
+        const obj = {
+            name: 'xiaoC'
+        }
+        function foo() {
+            console.log(this)
+        }
+        foo() //此时的this是Window
+    }
+    {
+        console.log('call,apply---------------------------------')
+        const obj = {
+            name: 'xiaoC'
+        }
+        function foo(v) {
+            console.log(this)
+            console.log(this.name)
+            console.log(v)
+        }
+        /* 传参形式 */
+        foo.call(obj, 1) //此时foo的this是obj。从第二个参数开始，依次传入。
+        foo.apply(obj, [1]) //此时foo的this是obj。第二个参数必须是输入，传入的值放在数组里。
+    }
+    {
+        console.log('bind----------------------------------')
+        const obj = {
+            name: 'xiaoB'
+        }
+        function foo() {
+            console.log(this)
+        }
+        foo.bind(obj) /* 绑定后，不立即执行 */
+    }
+    {
+        console.log('bind----------------------------------')
+        const obj = {
+            name: 'xiaoB'
+        }
+        function foo(v) {
+            console.log(this)
+            console.log(v)
+        }
+        foo.bind(obj)()
+        foo.bind(obj, 1)() // 传参方式和call一样
+        const bar = foo.bind(obj, 2)
+        bar() //this指向obj
+    }
+    {
+        console.log('bind----------------------------------')
+        const obj = {
+            name: 'xiaoB'
+        }
+        setTimeout(function(){
+            console.log(this) //this是Window
+        }, 1000)
+    }
+    {
+        console.log('bind----------------------------------')
+        const obj = {
+            name: 'xiaoB'
+        }
+        setTimeout(function(){
+            console.log(this) //this是obj
+        }.bind(obj), 1000)
+    }
+    </script>
+</body>
+</html>
