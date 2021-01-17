@@ -4,8 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>箭头函数</title>
+    <script src="./src/arrowfun.js"></script>
 </head>
 <body>
-    
+    <button id="btn1">1</button>
+    <button id="btn2">2</button>
+    <button id="btn3">3</button>
+    <button id="btn4">4</button>
+    <script>
+        /* 箭头函数的特点：
+        1、简洁。
+        2、a、箭头函数没有自己的this，箭头函数的this不是调用的时候决定的，而是在定义的时候处在的对象就是它的this。
+           b、理解：箭头函数的this看外层是否有函数，如果有常规函数，外层函数的this就是内部箭头函数的this，如果没有,this就是window。 */
+        
+        let btn1 = document.querySelector('#btn1')
+        let btn2 = document.querySelector('#btn2')
+        let btn3 = document.querySelector('#btn3')
+        let btn4 = document.querySelector('#btn4')
+        btn1.onclick = function() {
+            console.log(this) //btn1元素
+        }
+        btn2.onclick = () => console.log(this) // window,所处的对象是window
+        
+        console.log('-----------------------------')
+        
+        const obj = {
+            name: '箭头函数',
+            getName: function() { /* 常规函数的this，谁调用就是谁 */
+                btn3.onclick = () => {
+                    console.log(this)
+                }
+            }
+        }
+        obj.getName() // obj
+
+        const obj2 = {
+            name: '箭头函数2',
+            getName: () => { // 此处也是箭头函数
+                btn4.onclick = () => {
+                    console.log(this)
+                }
+            }
+        }
+        obj2.getName() // window
+    </script>
 </body>
 </html>
