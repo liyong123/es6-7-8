@@ -67,6 +67,7 @@
             console.log(obj.name)
             obj.name = 'xiaoS'
             console.log(obj.name)
+            console.log(obj)
         }
         {
             console.log('configurable-delete:--------------------------------')
@@ -104,9 +105,11 @@
             Object.defineProperty(obj, 'name', {
                 value: 'xiaoD'
             })
+            /* delete obj.name */ /* 报错：Cannot delete property 'name' of #<Object> */
+            /* obj.name = 'ssss' */
             console.log(obj.name)
             /* configurable: false, writable: true 可重新定义 */
-            /* configurable: false 时，不能删除当前属性，且不能重新配置当前属性的描述符,但是在writable: true的情况下，可以改变value的值
+            /* configurable: false 时，不能删除当前属性，且不能重新配置当前属性的描述符,但是在writable: true的情况下，可以改变value的值,不可删除属性。
                configurable: true时，可以删除当前属性，可以配置当前属性所有描述符。 */
         }
         {

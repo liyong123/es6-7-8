@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数预编译</title>
+</head>
+<body>
+    <script>
+        var a = 3
+        function fn(b) {
+            console.log(b)
+            console.log(a)
+            var a = 4
+        }
+        fn(1)
+    </script>
+</body>
+</html>

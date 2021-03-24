@@ -33,7 +33,7 @@
     // 1、fill 替换数组每项内容
     const arr= [1, 2, 3, 4, 5]
     const arr2= [...arr].fill(3); //每项都替换成3
-    const arr3= [...arr].fill(3, 1, 4) //第二个参数是下标，第三个参数是第几项
+    const arr3= [...arr].fill(3, 1, 4) //第二个参数是下标，第三个参数是第几项（也是下标但不包括此项）
     console.log(arr2) // [3, 3, 3, 3, 3]
     console.log(arr3) // [1, 3, 3, 3, 5]
 }
@@ -76,6 +76,6 @@
     const arr = [1, 2, 3, ['abc', 4, 5, 6, ['def', 7, 8, 9]]]
     let list = [].concat(...arr) //只能展开到第一层
     console.log('list:', list)
-    let flatList = arr.flat(2)  //不传参数，默认展开第一层
+    let flatList = arr.flat(Infinity)  //无限级，不传参数，默认展开第一层
     console.log('flatList:', flatList) //flatList: [1, 2, 3, "abc", 4, 5, 6, "def", 7, 8, 9]
 }
