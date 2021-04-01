@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作用域链</title>
+</head>
+<body>
+    <script>
+        function a() {
+
+        }
+        a()  // 此处打个断点，进入到函数a, 0: AO(Local), 1: GO(Global)
+        console.dir(a) // [[scopes]]
+    </script>
+</body>
+</html>
